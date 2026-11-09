@@ -230,7 +230,7 @@ body{margin:0;background:#C9AE82}
 .dot:hover{transform:scale(1.5)}
 .boat{position:absolute;top:-8px;margin-left:-15px;transition:left .6s cubic-bezier(.3,1.4,.5,1);pointer-events:none;animation:bob 3s ease-in-out infinite}
 .ambient{position:fixed;inset:0;z-index:55;pointer-events:none;overflow:hidden}
-.fall{position:absolute;top:-8vh;height:auto;opacity:.9;filter:drop-shadow(0 3px 4px rgba(80,20,0,.22));animation:fall var(--du) linear var(--dl) infinite}
+.fall{position:absolute;top:-6vh;aspect-ratio:1 / 1.5;border-radius:50% 50% 50% 0;background:var(--c);opacity:.8;animation:fall var(--du) linear var(--dl) infinite}
 @keyframes fall{0%{translate:0 0;rotate:0deg}50%{translate:4vw 55vh;rotate:220deg}100%{translate:-2vw 112vh;rotate:480deg}}
 .zoomable{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:zoom-in;font:inherit;color:inherit;text-align:inherit}
 .poster img{display:block;width:100%;height:100%;object-fit:cover;border:3px solid #F2C063;box-shadow:0 8px 18px rgba(0,0,0,.35);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
@@ -429,7 +429,7 @@ class Component extends DCLogic {
     ].map(([mon, diem, nx], i) => ({ mon, diem, nx, d: (0.3 + i * 0.15).toFixed(2) }));
     const seen = this.seen || new Set([0]);
     const dots = names.map((name, i) => ({ name, x: (i / (names.length - 1) * 100).toFixed(2), cls: i === page ? 'cur' : (seen.has(i) ? 'seen' : ''), go: () => this.go(i) }));
-    const fall = Array.from({ length: 12 }, (_, i) => ({ x: (i * 37 + 7) % 100, d: (-(i * 1.7)).toFixed(1), du: (11 + (i * 3) % 9).toString(), src: ['assets/img/canh-phuong-1.png', 'assets/img/canh-phuong-2.png', 'assets/img/canh-phuong-3.png', 'assets/img/canh-phuong-4.png'][i % 4], w: 18 + (i * 7) % 16 }));
+    const fall = Array.from({ length: 12 }, (_, i) => ({ x: (i * 37 + 7) % 100, d: (-(i * 1.7)).toFixed(1), du: (11 + (i * 3) % 9).toString(), c: ['#E0482E', '#F2C063', '#EFA7A0', '#C8361D'][i % 4], w: 9 + (i * 5) % 9 }));
     const NOTES = [
       ['“Mỗi tác phẩm phải là một phát minh về hình thức và một khám phá về nội dung.”', 'Lê-ô-nít Lê-ô-nốp, tác giả “Rừng Nga”', 'cream'],
       ['Em trở về đúng nghĩa trái tim em\nBiết làm sống những hồng cầu đã chết\nBiết lấy lại những gì đã mất\nBiết rút ngắn khoảng cách của yêu tin', 'Những câu thơ thầy hay đọc', 'rose'],
@@ -1185,7 +1185,7 @@ ${(dots || []).map((dt, $index) => html`<button type="button" class="dot ${dt.cl
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
 </nav>
 
-${(showFall) ? html`<div class="ambient" aria-hidden="true">${(fall || []).map((f, $index) => html`<img class="fall" src=${f.src} alt="" style="left: ${f.x}%; --dl: ${f.d}s; --du: ${f.du}s; width: ${f.w}px" />`)}</div>` : null}
+${(showFall) ? html`<div class="ambient" aria-hidden="true">${(fall || []).map((f, $index) => html`<span class="fall" style="left: ${f.x}%; --dl: ${f.d}s; --du: ${f.du}s; --c: ${f.c}; width: ${f.w}px"></span>`)}</div>` : null}
 
 ${(hasZoom) ? html`<div class="lightbox" onClick=${closeZoom}>
 <figure class="a pop" style="--d: -.45s; margin: 0"><img src=${zoomSrc} alt=${zoomCap} /><figcaption class="hand">${zoomCap} · bấm bất kỳ đâu để đóng</figcaption></figure>
