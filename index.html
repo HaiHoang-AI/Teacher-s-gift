@@ -176,6 +176,7 @@ body{margin:0;background:#C9AE82}
 }
 
 .pg{overflow-y:auto !important;scrollbar-width:thin;scrollbar-color:rgba(120,90,50,.35) transparent}
+.gate{position:fixed;inset:0;z-index:95;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:#F6EDDA url(assets/img/nen-giay.jpg) center/700px;background-blend-mode:multiply}
 .musicBtn{position:fixed;top:16px;right:16px;z-index:70;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:none;border-radius:999px;background:rgba(255,247,230,.94);color:#3B2A12;font-family:'Patrick Hand',cursive;font-size:17px;cursor:pointer;box-shadow:0 6px 16px rgba(60,35,10,.28)}
 .musicBtn .spin{animation:spin 3s linear infinite}
 @media (prefers-reduced-motion: reduce){.a,.bob,.swing,.spin,.wig:hover,.leaf,.spread{animation:none}}
@@ -191,24 +192,8 @@ const html = htm.bind(h);
 class DCLogic { constructor(props) { this.props = props || {}; this.state = {}; } setState(p) { Object.assign(this.state, typeof p === 'function' ? p(this.state) : p); schedule(); } forceUpdate() { schedule(); } }
 
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { page: 0, prevPage: 0, dir: 'next', flipping: false, open: -1, playing: true }; this.tx = null; this.pausedByVideo = false; }
-  // Nhạc mặc định bật: thử phát ngay; nếu trình duyệt chặn thì phát ở lần chạm/bấm đầu tiên
-  componentDidMount() {
-    const evs = ['pointerdown', 'touchstart'];
-    this.removeUnlock = () => evs.forEach((ev) => document.removeEventListener(ev, this.unlock, true));
-    this.unlock = (e) => {
-      this.removeUnlock();
-      if (this.started) return;
-      this.started = true;
-      if (e.target && e.target.closest && e.target.closest('.musicBtn')) return;
-      if (this.state.playing) this.music(true);
-    };
-    evs.forEach((ev) => document.addEventListener(ev, this.unlock, true));
-    const a = document.getElementById('bgm');
-    const r = a ? a.play() : null;
-    if (r && r.then) r.then(() => { this.started = true; this.removeUnlock(); }).catch(() => {});
-  }
-  componentWillUnmount() { clearTimeout(this.timer); if (this.removeUnlock) this.removeUnlock(); }
+  constructor(props) { super(props); this.state = { page: 0, prevPage: 0, dir: 'next', flipping: false, open: -1, playing: false, gate: true }; this.tx = null; this.pausedByVideo = false; }
+  componentWillUnmount() { clearTimeout(this.timer); }
   go(target) {
     const total = 12;
     this.page0Start(target);
@@ -363,6 +348,8 @@ class Component extends DCLogic {
       close: () => this.setState({ open: -1 }),
       spinCls: this.state.playing ? 'spin' : '',
       playLabel: this.state.playing ? 'Đang phát… (bấm để dừng)' : 'Bật băng nghe bài hát',
+      gateOn: this.state.gate,
+      openGift: () => { this.started = true; this.setState({ gate: false }); this.music(true); },
       musicLabel: this.state.playing ? 'Nhạc: bật' : 'Nhạc: tắt',
       musicAria: this.state.playing ? 'Tắt nhạc nền' : 'Bật nhạc nền',
       noteCls: this.state.playing ? 'spin' : '',
@@ -690,6 +677,14 @@ ${(canNextCorner) ? html`<button type="button" class="corner r" onClick=${next} 
 </div>
 </div>
 
+${(gateOn) ? html`<div class="gate">
+<p class="hand a up" style="--d: 0s; margin: 0; font-size: 20px; color: #7A5B2E">Lớp 12V1 · Dòng chảy 9+ · 20.11.2026</p>
+<p class="a up" style="--d: .15s; margin: 18px 0 0; font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100; font-weight: 600; font-size: clamp(34px, 6vw, 64px); line-height: 1.05; color: #2A231C">Một món quà nhỏ<br />gửi thầy Hoàng</p>
+<p class="a up" style="--d: .3s; margin: 18px 0 0; font-size: 17px; line-height: 1.7; color: #5E4A2E; max-width: 420px">Thầy bật loa lên một chút nhé, có bài hát của lớp đi cùng.</p>
+<button type="button" class="navbtn a pop" onClick=${openGift} style="--d: .5s; margin-top: 32px; min-height: 56px; padding: 0 30px; background: #C8361D; color: #FBE6BE; font-size: 22px">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+Chạm để mở món quà</button>
+</div>` : null}
 <audio id="bgm" src="assets/audio/giai-dieu-9.mp3" loop preload="auto"></audio>
 <button type="button" class="musicBtn" onClick=${togglePlay} aria-label=${musicAria}>
 <svg class=${noteCls} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
@@ -717,7 +712,7 @@ const comp = new Component({});
 const root = document.getElementById('app');
 let queued = false;
 function draw() { queued = false; render(view(comp.renderVals()), root); }
-function schedule() { if (!queued) { queued = true; requestAnimationFrame(draw); } }
+function schedule() { if (!queued) { queued = true; Promise.resolve().then(draw); } }
 draw();
 if (comp.componentDidMount) comp.componentDidMount();
 </script>
