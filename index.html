@@ -176,7 +176,21 @@ body{margin:0;background:#C9AE82}
 }
 
 .pg{overflow-y:auto !important;scrollbar-width:thin;scrollbar-color:rgba(120,90,50,.35) transparent}
-.gate{position:fixed;inset:0;z-index:95;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:#F6EDDA url(assets/img/nen-giay.jpg) center/700px;background-blend-mode:multiply}
+.gate{position:fixed;inset:0;z-index:95;overflow:hidden}
+.gate .gl,.gate .gr{position:absolute;top:0;bottom:0;width:50.5%;background:#F6EDDA url(assets/img/nen-giay.jpg) center/700px;background-blend-mode:multiply}
+.gate .gl{left:0;box-shadow:inset -18px 0 24px -16px rgba(70,40,10,.25)}
+.gate .gr{right:0;box-shadow:inset 18px 0 24px -16px rgba(70,40,10,.25)}
+.gate-in{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+.petals{position:absolute;left:50%;top:58%;z-index:3;pointer-events:none}
+.petal{position:absolute;left:0;top:0;aspect-ratio:1 / 1.5;border-radius:50% 50% 50% 0;background:var(--c);opacity:0}
+.gate.opening .gate-in{animation:gateOut .5s ease-in forwards}
+.gate.opening .gl{animation:slideL 1.1s .35s cubic-bezier(.75,0,.25,1) forwards}
+.gate.opening .gr{animation:slideR 1.1s .35s cubic-bezier(.75,0,.25,1) forwards}
+.gate.opening .petal{animation:burst 1.5s var(--dl) cubic-bezier(.15,.7,.3,1) forwards}
+@keyframes gateOut{to{opacity:0;scale:.92;filter:blur(4px)}}
+@keyframes slideL{to{translate:-102% 0;rotate:-4deg}}
+@keyframes slideR{to{translate:102% 0;rotate:4deg}}
+@keyframes burst{0%{opacity:1;translate:0 0;rotate:0deg;scale:.3}60%{opacity:1}100%{opacity:0;translate:var(--x) var(--y);rotate:var(--r);scale:1}}
 .musicBtn{position:fixed;top:16px;right:16px;z-index:70;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:none;border-radius:999px;background:rgba(255,247,230,.94);color:#3B2A12;font-family:'Patrick Hand',cursive;font-size:17px;cursor:pointer;box-shadow:0 6px 16px rgba(60,35,10,.28)}
 .musicBtn .spin{animation:spin 3s linear infinite}
 @media (prefers-reduced-motion: reduce){.a,.bob,.swing,.spin,.wig:hover,.leaf,.spread{animation:none}}
@@ -192,7 +206,7 @@ const html = htm.bind(h);
 class DCLogic { constructor(props) { this.props = props || {}; this.state = {}; } setState(p) { Object.assign(this.state, typeof p === 'function' ? p(this.state) : p); schedule(); } forceUpdate() { schedule(); } }
 
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { page: 0, prevPage: 0, dir: 'next', flipping: false, open: -1, playing: false, gate: true }; this.tx = null; this.pausedByVideo = false; }
+  constructor(props) { super(props); this.state = { page: 0, prevPage: 0, dir: 'next', flipping: false, open: -1, playing: false, gate: 'on' }; this.tx = null; this.pausedByVideo = false; }
   componentWillUnmount() { clearTimeout(this.timer); }
   go(target) {
     const total = 12;
@@ -312,7 +326,7 @@ class Component extends DCLogic {
     const back = dir === 'next' ? sides[page][0] : sides[page][1];
     const flags = {};
     for (let i = 0; i < total; i++) {
-      flags['s' + i] = page === i || (flipping && prevPage === i);
+      flags['s' + i] = (page === i || (flipping && prevPage === i)) && (i > 0 || this.state.gate !== 'on');
       let k = '';
       if (flipping && i === page) k = dir === 'next' ? 'clipR' : 'clipL';
       else if (flipping && i === prevPage) k = 'old ' + (dir === 'next' ? 'clipL' : 'clipR');
@@ -348,8 +362,21 @@ class Component extends DCLogic {
       close: () => this.setState({ open: -1 }),
       spinCls: this.state.playing ? 'spin' : '',
       playLabel: this.state.playing ? 'Đang phát… (bấm để dừng)' : 'Bật băng nghe bài hát',
-      gateOn: this.state.gate,
-      openGift: () => { this.started = true; this.setState({ gate: false }); this.music(true); },
+      gateOn: this.state.gate !== 'off',
+      gateCls: this.state.gate === 'opening' ? 'opening' : '',
+      petals: Array.from({ length: 22 }, (_, i) => {
+        const ang = (i / 22) * Math.PI * 2 + (i % 3) * 0.3;
+        const dist = 260 + (i * 47) % 260;
+        return { x: Math.round(Math.cos(ang) * dist), y: Math.round(Math.sin(ang) * dist * 0.8 - 80), r: (i * 67) % 360 - 180,
+          c: ['#E0482E', '#F2C063', '#EFA7A0', '#C8361D', '#8FC3BA'][i % 5], d: ((i % 6) * 0.03).toFixed(2), w: 12 + (i * 5) % 14 };
+      }),
+      openGift: () => {
+        if (this.state.gate !== 'on') return;
+        this.started = true;
+        this.setState({ gate: 'opening' });
+        this.music(true);
+        setTimeout(() => this.setState({ gate: 'off' }), 1500);
+      },
       musicLabel: this.state.playing ? 'Nhạc: bật' : 'Nhạc: tắt',
       musicAria: this.state.playing ? 'Tắt nhạc nền' : 'Bật nhạc nền',
       noteCls: this.state.playing ? 'spin' : '',
@@ -677,13 +704,17 @@ ${(canNextCorner) ? html`<button type="button" class="corner r" onClick=${next} 
 </div>
 </div>
 
-${(gateOn) ? html`<div class="gate">
+${(gateOn) ? html`<div class="gate ${gateCls}">
+<div class="gl"></div><div class="gr"></div>
+<div class="petals" aria-hidden="true">${(petals || []).map((pt, $index) => html`<span class="petal" style="--x: ${pt.x}px; --y: ${pt.y}px; --r: ${pt.r}deg; --c: ${pt.c}; --dl: ${pt.d}s; width: ${pt.w}px"></span>`)}</div>
+<div class="gate-in">
 <p class="hand a up" style="--d: 0s; margin: 0; font-size: 20px; color: #7A5B2E">Lớp 12V1 · Dòng chảy 9+ · 20.11.2026</p>
 <p class="a up" style="--d: .15s; margin: 18px 0 0; font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100; font-weight: 600; font-size: clamp(34px, 6vw, 64px); line-height: 1.05; color: #2A231C">Một món quà nhỏ<br />gửi thầy Hoàng</p>
-<p class="a up" style="--d: .3s; margin: 18px 0 0; font-size: 17px; line-height: 1.7; color: #5E4A2E; max-width: 420px">Thầy bật loa lên một chút nhé, có bài hát của lớp đi cùng.</p>
+<p class="a up" style="--d: .3s; margin: 18px 0 0; font-size: 17px; line-height: 1.7; color: #5E4A2E; max-width: 520px; text-wrap: balance">Thầy bật loa lên một chút nhé, có bài hát của lớp đi cùng.</p>
 <button type="button" class="navbtn a pop" onClick=${openGift} style="--d: .5s; margin-top: 32px; min-height: 56px; padding: 0 30px; background: #C8361D; color: #FBE6BE; font-size: 22px">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
 Chạm để mở món quà</button>
+</div>
 </div>` : null}
 <audio id="bgm" src="assets/audio/giai-dieu-9.mp3" loop preload="auto"></audio>
 <button type="button" class="musicBtn" onClick=${togglePlay} aria-label=${musicAria}>
