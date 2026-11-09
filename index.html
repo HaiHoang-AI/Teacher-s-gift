@@ -299,6 +299,10 @@ body{margin:0;background:#C9AE82}
 }
 
 /* ===== Sổ tay lý luận, nhật ký ===== */
+.quips{display:flex;flex-wrap:wrap;align-items:center;gap:.6cqw .8cqw;margin-top:1.2cqw}
+.quip{padding:.45cqw 1.2cqw;border-radius:999px;background:#BCDDE3;color:#1E2B4A;font-size:max(13px,1.1cqw);box-shadow:0 3px 8px rgba(30,43,74,.15);transform:rotate(var(--t,0deg));transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.quip:hover{transform:rotate(0deg) scale(1.08)}
+.quip-h{font-size:var(--cap);color:#9A3B1E}
 .note{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;gap:.6cqw;padding:1.6cqw 1.4cqw 1.2cqw;background:#FBE7A1;box-shadow:0 8px 16px rgba(60,35,10,.22);transform:rotate(var(--t,0deg));transition:transform .45s cubic-bezier(.3,1.6,.5,1),box-shadow .45s}
 .note:hover{transform:rotate(0deg) scale(1.06);box-shadow:0 18px 30px rgba(60,35,10,.3);z-index:5}
 .note.rose{background:#F7C9C2}.note.mint{background:#CDE8E1}.note.sky{background:#D6E4F5}.note.cream{background:#FFFDF6}.note.sun{background:#FBE7A1}
@@ -424,8 +428,8 @@ class Component extends DCLogic {
       ['Truyền cảm hứng', '10', 'Biến môn khó nhất thành môn đẹp nhất.'],
       ['Hài hước', '10', '“Like a horse.” Hết.'],
       ['Thời trang', '10', 'Áo dài rồng, khăn rằn, vest nhung đỏ.'],
-      ['Đẹp trai', '+∞', 'Dương vô cùng. Thang điểm 10 không đủ chỗ ghi.'],
-      ['Thương học trò', '10+', 'Vượt khung điểm, xin phép cộng thêm.']
+      ['Thương học trò', '10+', 'Vượt khung điểm, xin phép cộng thêm.'],
+      ['Đẹp trai', '+∞', 'Dương vô cùng. Thang điểm 10 không đủ chỗ ghi.']
     ].map(([mon, diem, nx], i) => ({ mon, diem, nx, d: (0.3 + i * 0.15).toFixed(2) }));
     const seen = this.seen || new Set([0]);
     const dots = names.map((name, i) => ({ name, x: (i / (names.length - 1) * 100).toFixed(2), cls: i === page ? 'cur' : (seen.has(i) ? 'seen' : ''), go: () => this.go(i) }));
@@ -801,6 +805,7 @@ ${(s8) ? html`<div class="spread ${k8}">
 <p class="kicker a up" style="color: #9A3B1E">Sổ tay lý luận · những câu thầy dạy để mở bài</p>
 <div class="persp"><h2 class="h2 a stand" style="--d: .1s; color: #3B2A12">Điểm tựa<br />của bài văn 9+</h2></div>
 <p class="txt a up" style="--d: .25s">Thầy dạy: muốn bài văn đứng vững thì phải có điểm tựa lý luận. Thế là sổ của đứa nào cũng kín những câu thế này, thuộc đến mức chỉ cần nghe tên tác giả là đọc được cả câu. Có câu để mở bài, có câu để kết bài, có câu để “nâng cao vấn đề” lấy trọn điểm.</p>
+<div class="quips a up" style="--d: .35s"><span class="hand quip-h">Và mỗi lần thầy mở màn bằng:</span><span class="quip" style="--t: -2deg">“Công thức đỉnh cao”</span><span class="quip" style="--t: 1.5deg">“Kĩ thuật hoá giải dạng bài…”</span><span class="quip" style="--t: -1deg">“Thủ khoa sẽ viết như sau:”</span><span class="hand quip-h">… là cả lớp biết sắp được 9+.</span></div>
 <div class="notes" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6cqw; margin-top: 1.6cqw">
 ${(notesL || []).map((n, $index) => html`<div class="a ${n.anim}" style="--d: ${n.d}s"><div class="note ${n.color}" style="--t: ${n.t}deg"><span class="pin" aria-hidden="true"></span><span class="nq">${n.q}</span><span class="na">${n.a}</span></div></div>`)}
 </div>
