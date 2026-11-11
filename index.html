@@ -77,6 +77,8 @@ body{margin:0;background:#C9AE82}
 .env:hover .letter,.env:focus-visible .letter{transform:translateY(-40%)}
 .env .seal{position:absolute;left:50%;top:52%;z-index:4;width:2.8cqw;height:2.8cqw;min-width:28px;min-height:28px;translate:-50% -50%;border-radius:50%;background:#A82C17;color:#F8E9C8;display:flex;align-items:center;justify-content:center;font-family:'Dancing Script',cursive;font-size:max(13px,1.1cqw);transition:opacity .3s}
 .env:hover .seal{opacity:0}
+.one-letter .env .who{font-size:max(18px,2cqw)}
+.one-letter .env .letter{font-size:max(15px,1.6cqw)}
 .env .who{position:absolute;left:4px;right:4px;bottom:6%;z-index:4;font-family:'Patrick Hand',cursive;font-size:max(12px,1.05cqw);line-height:1.1;color:#3B2A12;text-align:center}
 .stele{transition:transform .45s cubic-bezier(.3,1.6,.5,1),box-shadow .45s}
 .stele:hover{transform:translateY(-8px);box-shadow:0 0 0 2px #E3B556,0 14px 24px rgba(227,181,86,.35)}
@@ -559,14 +561,7 @@ class Component extends DCLogic {
       { src: 'assets/img/thay-ao-ngua.jpg', cap: 'Áo có ngựa, đúng chất thầy', t: 2, tape: 't-tre' }
     ].map((f, i) => ({ ...f, d: (0.25 + i * 0.15).toFixed(2) }));
     const raw = [
-      { name: 'Đứa ngồi bàn đầu', text: 'Con vẫn nhớ buổi đầu tiên vào lớp, thầy viết lên bảng: “Học văn là học tập sự tử tế.” Lúc đó con nghĩ chắc thầy nói cho hay thôi. Một năm sau con mới hiểu: thầy dạy chúng con đọc một trang văn, nhưng thật ra là dạy cách nhìn một con người.\nCon cảm ơn thầy vì đã kiên nhẫn với cả những câu hỏi ngớ ngẩn nhất của con.' },
-      { name: 'Đứa hay nộp bài muộn', text: 'Thầy ơi, con xin lỗi vì bao nhiêu lần nộp bài lúc 23h59 (và cả 0h03). Thầy chưa bao giờ mắng, chỉ nhắn một câu: “Con làm được mà.” Câu đó con nhớ hơn mọi lời phê đỏ.\nMay mắn là tên gọi khác của sự nỗ lực — và con đã nỗ lực, thật đấy ạ.' },
-      { name: 'Đứa từng sợ môn Văn', text: 'Trước khi học thầy, con sợ Văn lắm. Con nghĩ mình không có “năng khiếu”. Thầy bảo không cần năng khiếu, chỉ cần chịu đọc, chịu nghĩ, chịu viết lại lần thứ năm.\nGiờ con không còn sợ nữa. Con còn thấy thương Văn. Con cảm ơn thầy nhiều lắm.' },
-      { name: 'Đứa đi xe về muộn nhất', text: 'Những tối học xong, cả bọn đi xe về qua mấy con phố vắng, vừa đi vừa cãi nhau về đề Nghị luận. Thầy biết không, chính những buổi tối ấy là phần con nhớ nhất của năm 12.\nCảm ơn thầy đã là ngọn đèn của những tối ôn thi.' },
-      { name: 'Một trong 228 người', text: 'Có hôm lớp online đông tới 228 người, 10 giờ đêm mà thầy vẫn giảng hăng như buổi sáng. Con ngồi sau màn hình, tắt cam, nhưng con nghe hết từng chữ.\nCon chỉ muốn nói: con đã ở đó, và con biết ơn thầy.' },
-      { name: 'Đứa giữ cuốn Chốt hạ 9+', text: 'Cuốn Chốt hạ 9+ của con giờ nhàu nát, đầy highlight và cả vết trà sữa. Con không nỡ bỏ. Nó là bằng chứng một năm con đã cố gắng thế nào, và thầy đã đồng hành cùng con thế nào.\nCon hứa sẽ giữ nó thật lâu.' },
-      { name: 'Đứa áo dài hồng ở Văn Miếu', text: 'Hôm Lễ dâng hương ở Văn Miếu, thầy mặc áo dài đỏ đứng giữa cả trăm đứa học trò, cười tươi như Tết. Lúc ấy con thấy mình không chỉ đi thi một mình.\nCảm ơn thầy đã đưa chúng con về nơi “tôn sư trọng đạo” trước giờ vào trận.' },
-      { name: 'Cả lớp 12V1', text: 'Thầy bảo: “Con phải được 9+ Văn.” Chúng con đã cố hết sức để giữ lời hứa ấy. Nhưng điều chúng con mang theo lâu nhất không phải con điểm, mà là thầy — người đã đặt tên cho dòng chảy của chúng con.\nChúc thầy 20/11 thật hạnh phúc. Chúng con thương thầy!' }
+      { name: 'Chử Mỹ Dung', text: 'Con lại về rồi đâyyy. Thầy ơi hơn một năm qua tụi con đứa nào cũng làm được nhiều thứ và đã lớn hơn ạ. Nhưng con vẫn nhớ ngày nào còn tranh nhau vào lớp để kiếm chỗ đẹp nghe thầy giảng, ngày còn cười khúc khích trong lớp vì thầy trêu, ngày khóc nhè vì điểm chưa cao mà thầy dỗ không nín, và đó cũng chính là những năm tháng 17 tuổi đẹp nhất cả đời chẳng thể quên khi được đồng hành cùng thầy Hoàng và dòng chảy 9+. Con biết ơn thầy lắm, biết ơn vì mầm xanh yêu thương thầy gieo cho trò nhỏ này.' }
     ];
     const anims = ['pop', 'drop', 'fromR', 'pop'];
     const letters = raw.map((l, i) => ({ ...l, anim: anims[i % 4], d: (0.2 + i * 0.09).toFixed(2), open: () => this.setState({ open: i }) }));
@@ -1110,7 +1105,7 @@ ${(s17) ? html`<div class="spread ${k17}">
 <div class="pg pgL tex" style="background-color: #F1DFB6">
 <p class="kicker a up" style="color: #7A5214">những phong thư</p>
 <div class="persp"><h2 class="h2 a stand" style="--d: .1s; color: #3B2A12">Thư gửi thầy</h2></div>
-<p class="txt a up" style="--d: .2s">Có những điều nói trực tiếp thì ngại, nên chúng con viết. Tám phong thư là tám giọng khác nhau: đứa từng sợ Văn, đứa hay nộp bài muộn, đứa ngồi bàn đầu… nhưng cùng một lời cảm ơn. Chế Lan Viên bảo thơ cần có hình, có ý và có tình. Thư của chúng con có thể vụng về hình và ý, nhưng tình thì đầy.</p>
+<p class="txt a up" style="--d: .2s">Có những điều nói trực tiếp thì ngại, nên chúng con viết. Lá thư dưới đây là của Mỹ Dung, nhưng cũng là lời của cả lớp gửi thầy. Chế Lan Viên bảo thơ cần có hình, có ý và có tình. Thư của chúng con có thể vụng về hình và ý, nhưng tình thì đầy.</p>
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.4cqw; margin-top: 3cqw; padding: 0 1cqw">
 <div class="a fromL" style="--d: .3s"><figure class="pol" style="--t: -3deg"><img src="assets/img/kep-do.png" alt="" style="position: absolute; top: -2.4cqw; left: 1.6cqw; width: 2.6cqw; z-index: 4; object-fit: contain" /><img src="assets/img/anh-531107985.jpg" alt="Lá thư viết tay gửi thầy" style="aspect-ratio: 3 / 4; object-position: 50% 70%" /><figcaption>“Hãy nói lời yêu thật nhiều…”</figcaption></figure></div>
 <div class="a fromL" style="--d: .5s; margin-top: 3cqw"><figure class="pol" style="--t: 3deg"><img src="assets/img/kep-go.png" alt="" style="position: absolute; top: -2.8cqw; left: 50%; width: 2.8cqw; translate: -50% 0; z-index: 4; object-fit: contain" /><img src="assets/img/anh-486700578.jpg" alt="Tin nhắn báo thầy đã thi xong" style="aspect-ratio: 3 / 4; object-position: 50% 0" /><figcaption>“Trò của thầy thi xong rùi ạ”</figcaption></figure></div>
@@ -1120,13 +1115,13 @@ ${(s17) ? html`<div class="spread ${k17}">
 </div>
 <div class="pg pgR tex" style="background-color: #F1DFB6; display: flex; flex-direction: column">
 <p class="hand a up" style="margin: 0; font-size: var(--k); color: #6B5229">Rê chuột để hé thư, bấm để đọc trọn.</p>
-<div class="fill" style="flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 1.6cqw 1.6cqw; margin-top: 1.2cqw; padding-bottom: 1.4cqw">
-${(letters || []).map((lt, $index) => html`<div class="a ${lt.anim}" style="--d: ${lt.d}s">
+<div class="one-letter" style="flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2cqw; margin-top: 1.2cqw; padding-bottom: 1.4cqw">
+${(letters || []).map((lt, $index) => html`<div class="a ${lt.anim}" style="--d: ${lt.d}s; width: 80%">
 <button type="button" class="env" onClick=${lt.open} aria-label="Mở thư: ${lt.name}">
 <span class="body"></span><span class="letter">Kính gửi thầy…</span><span class="pocket"></span><span class="flap"></span><span class="seal">9+</span><span class="who">${lt.name}</span>
 </button>
 </div>`)}
-<div class="a pop" style="--d: 1.2s"><img class="stk wig" src="assets/img/hd-am-tra.png" alt="Sticker ấm trà" /></div>
+<div class="a pop" style="--d: 1.2s; width: 18%; align-self: flex-end"><img class="stk wig" src="assets/img/hd-am-tra.png" alt="Sticker ấm trà" /></div>
 </div>
 <span class="pgno">34</span>
 </div>
