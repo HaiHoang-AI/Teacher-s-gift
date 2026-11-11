@@ -365,7 +365,7 @@ body{margin:0;background:#C9AE82}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/preact@10.19.3/dist/preact.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
-</head>
+<style>html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}</style></head>
 <body>
 <div id="app"></div>
 <script>
@@ -929,7 +929,7 @@ ${(s10) ? html`<div class="spread ${k10}">
 <p class="vm-rule a up" style="--d: .15s" aria-hidden="true"><span></span>✦<span></span></p>
 <p class="txt a up" style="--d: .2s; color: #EBD9B8">Cả buổi sáng hôm ấy được ghi lại trong thước phim này: lễ dâng hương, những lời chúc, những nụ cười trước giờ vào trận. Thầy bấm vào để xem lại.</p>
 <div class="a up" style="--d: .35s; margin: 1.2cqw auto 0; width: 90%; background: #000; box-shadow: 0 14px 30px rgba(0,0,0,.4)">
-<video src="assets/video/video-van-mieu.mp4" poster="assets/img/video-van-mieu-poster.jpg" controls="" playsinline="" preload="metadata" onPlay=${videoPlay} style="display: block; width: 100%; aspect-ratio: 16 / 9; background: #000"></video>
+<video src="assets/video/video-van-mieu.mp4" poster="assets/img/video-van-mieu-poster.jpg" controls playsinline preload="metadata" onPlay=${videoPlay} style="display: block; width: 100%; aspect-ratio: 16 / 9; background: #000"></video>
 </div>
 <div style="display: flex; align-items: flex-end; gap: 1.6cqw; margin-top: 1cqw">
 <p class="hand a up" style="--d: .55s; margin: 0; flex: 1; font-size: var(--cap); color: #E9C46A">Thầy bấm ▶ để xem. Nhạc nền tạm nghỉ, sang trang khác là nhạc chạy lại.</p>
@@ -943,7 +943,7 @@ ${(s10) ? html`<div class="spread ${k10}">
 <p class="txt a up" style="--d: .15s; color: #EBD9B8">Từ Văn Miếu trở về, cả lớp quây quần trong căn phòng quen thuộc cho buổi học cuối cùng. Phòng chật kín, hoa trên bàn, cây đàn trên tay. Mười hai giây thôi, mà là cả một năm.</p>
 <div class="a fromR" style="--d: .3s; margin-top: 1.6cqw">
 <figure class="pol" style="--t: 2deg"><span class="tape top t-sun"></span>
-<video src="assets/video/video-lop-hoc.mp4" poster="assets/img/video-lop-hoc-poster.jpg" controls="" playsinline="" preload="metadata" onPlay=${videoPlay} style="display: block; width: 100%; aspect-ratio: 16 / 9; background: #000"></video>
+<video src="assets/video/video-lop-hoc.mp4" poster="assets/img/video-lop-hoc-poster.jpg" controls playsinline preload="metadata" onPlay=${videoPlay} style="display: block; width: 100%; aspect-ratio: 16 / 9; background: #000"></video>
 <figcaption>Buổi học cuối cùng</figcaption></figure>
 </div>
 <div style="display: flex; gap: 2cqw; align-items: flex-start; margin-top: 1.6cqw">
@@ -1272,7 +1272,7 @@ ${(gateOn) ? html`<div class="gate ${gateCls}">
 Chạm để mở món quà</button>
 </div>
 </div>` : null}
-<audio id="bgm" src="assets/audio/giai-dieu-9.mp3" loop="" preload="auto"></audio>
+<audio id="bgm" src="assets/audio/giai-dieu-9.mp3" loop preload="auto"></audio>
 <button type="button" class="musicBtn" onClick=${togglePlay} aria-label=${musicAria}>
 <svg class=${noteCls} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
 <span>${musicLabel}</span></button>
