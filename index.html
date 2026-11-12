@@ -442,7 +442,8 @@ class Component extends DCLogic {
       ['assets/img/vd-duong-quang-anh.jpg', 'Dương Quang Anh · 9'], ['assets/img/vd-chu-my-dung.jpg', 'Chử Mỹ Dung · 9.25'],
       ['assets/img/vd-tran-quang-anh-1.jpg', 'Trần Quang Anh · 9'], ['assets/img/vd-nguyen-kim-ngoc.jpg', 'Nguyễn Kim Ngọc · 9.25'],
       ['assets/img/vd-nguyen-khanh-chi.jpg', 'Nguyễn Khánh Chi · 9'], ['assets/img/vd-nguyen-duy-bao.jpg', 'Nguyễn Duy Bảo · 8.25'],
-      ['assets/img/vd-khuc-thanh-cong.jpg', 'Khúc Thành Công · 9.25'], ['assets/img/vd-tran-quang-anh-2.jpg', 'Trần Quang Anh · 9']
+      ['assets/img/vd-khuc-thanh-cong.jpg', 'Khúc Thành Công · 9.25'], ['assets/img/vd-tran-quang-anh-2.jpg', 'Trần Quang Anh · 9'],
+      ['assets/img/poster-thanh-van.jpg', 'Vũ Phạm Thanh Vân · 9.25']
     ].map(([src, cap], i) => ({ src, cap, d: (0.25 + i * 0.07).toFixed(2), anim: ['pop', 'drop', 'pop'][i % 3], zoom: zoomOf(src, cap) }));
     const scores = [
       { src: 'assets/img/tra-9-75.jpg', cap: 'Ngữ văn: 9.75', t: -3, tape: 't-sun', anim: 'drop' },
@@ -547,7 +548,7 @@ class Component extends DCLogic {
       { tag: 'Outro', text: 'Rồi mai sau, qua vạn nẻo đường xa\nEm mang theo lớp Văn như món quà\nMột niềm tin – viết đời bằng nhân ái\nGiữa nhân gian, vẫn thắp sáng thơ ca', anim: 'pop', t: 3 }
     ].map((l, i) => ({ ...l, d: (0.2 + i * 0.15).toFixed(2) }));
     const honors = [
-      ['Chử Mỹ Dung', '9.25'], ['Nguyễn Kim Ngọc', '9.25'], ['Khúc Thành Công', '9.25'],
+      ['Chử Mỹ Dung', '9.25'], ['Nguyễn Kim Ngọc', '9.25'], ['Khúc Thành Công', '9.25'], ['Vũ Phạm Thanh Vân', '9.25'],
       ['Ngô Trung Đức', '9'], ['Lê Hải Hoàng', '9'], ['Dương Quang Anh', '9'],
       ['Nguyễn Khánh Chi', '9'], ['Trần Quang Anh', '9'],
       ['Phạm Quang Minh', '8.5'], ['Nguyễn Duy Bảo', '8.25']
@@ -1043,7 +1044,7 @@ ${(s14) ? html`<div class="spread ${k14}">
 <span class="pgno">27</span>
 </div>
 <div class="pg pgR dk" style="background-color: #3D403C; color: #2A2620; display: flex; flex-direction: column">
-<div class="persp fill2" style="flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 2.6cqw 1.2cqw; padding: .6cqw 0 2.6cqw">
+<div class="persp fill2" style="flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 1.8cqw 1cqw; padding: .6cqw 0 1.8cqw">
 ${(honors || []).map((h, $index) => html`<div class="a stand" style="--d: ${h.d}s; display: flex; flex-direction: column; align-items: center">
 <div class="stele" style="flex: 1; min-height: 0; width: 100%; display: flex; flex-direction: column; justify-content: center; padding: 1.8cqw .6cqw 1.2cqw; background: #BDB6A5; border-radius: 6cqw 6cqw 3px 3px; text-align: center; box-shadow: inset 0 0 0 3px #A49C8B, inset 0 0 0 7px #BDB6A5, inset 0 0 0 8px #A49C8B">
 <p style="margin: 0; font-size: max(12px, .8cqw); letter-spacing: .14em; color: #3F392F">ĐIỂM VĂN</p>
@@ -1070,7 +1071,7 @@ ${(postersL || []).map((ps, $index) => html`<div class="a pop" style="--d: ${ps.
 <span class="pgno">29</span>
 </div>
 <div class="pg pgR dk" style="background-color: #6E1A12; color: #FBE6BE; display: flex; flex-direction: column">
-<div class="fill" style="flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 2cqw 1.6cqw; padding: .6cqw 0 2.4cqw">
+<div class="fill" style="flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 1.4cqw 1.4cqw; padding: .4cqw 0 2cqw">
 ${(postersR || []).map((ps, $index) => html`<div class="a ${ps.anim}" style="--d: ${ps.d}s"><button type="button" class="zoomable poster" onClick=${ps.zoom} aria-label="Phóng to ${ps.cap}"><img src=${ps.src} alt=${ps.cap} /></button></div>`)}
 </div>
 <span class="pgno">30</span>
