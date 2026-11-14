@@ -77,7 +77,7 @@ body{margin:0;background:#C9AE82}
 .env:hover .letter,.env:focus-visible .letter{transform:translateY(-40%)}
 .env .seal{position:absolute;left:50%;top:52%;z-index:4;width:2.8cqw;height:2.8cqw;min-width:28px;min-height:28px;translate:-50% -50%;border-radius:50%;background:#A82C17;color:#F8E9C8;display:flex;align-items:center;justify-content:center;font-family:'Dancing Script',cursive;font-size:max(13px,1.1cqw);transition:opacity .3s}
 .env:hover .seal{opacity:0}
-.one-letter .env .who{font-size:max(18px,2cqw)}
+.one-letter .env .who{font-size:max(14px,1.45cqw)}
 .one-letter .env .letter{font-size:max(15px,1.6cqw)}
 .env .who{position:absolute;left:4px;right:4px;bottom:6%;z-index:4;font-family:'Patrick Hand',cursive;font-size:max(12px,1.05cqw);line-height:1.1;color:#3B2A12;text-align:center}
 .stele{transition:transform .45s cubic-bezier(.3,1.6,.5,1),box-shadow .45s}
@@ -312,9 +312,13 @@ body{margin:0;background:#C9AE82}
 .note .pin{position:absolute;top:-.6cqw;left:50%;width:1.6cqw;height:1.6cqw;min-width:14px;min-height:14px;translate:-50% 0;border-radius:50%;background:#C8361D;box-shadow:0 2px 4px rgba(0,0,0,.35),inset -2px -2px 0 rgba(0,0,0,.2)}
 .nq{font-family:'Fraunces',serif;font-style:italic;font-size:max(14px,1.22cqw);line-height:1.35;color:#2A231C;white-space:pre-line}
 .na{font-family:'Patrick Hand',cursive;font-size:max(13px,1.1cqw);color:#9A3B1E;text-align:right}
-.diary{position:relative;background-color:#E6CF98 !important;background-image:url(assets/img/giay-ke-ngang.jpg) !important;background-size:100% auto !important;background-position:center top !important;background-blend-mode:multiply;box-shadow:inset 0 0 3cqw rgba(110,70,20,.35);display:flex;flex-direction:column;justify-content:center;gap:.8cqw;padding:3.4cqw 3.4cqw 3.4cqw 6.4cqw !important}
-.dy-date{margin:0;font-family:'Playwrite VN','Dancing Script',cursive;font-weight:400;font-size:max(13px,1.12cqw);color:#8A3322}
-.dy-text{margin:.15cqw 0 0;font-family:'Playwrite VN','Dancing Script',cursive;font-weight:300;font-size:max(13px,1.12cqw);line-height:1.65;color:#2B2868}
+.diary{background-image:repeating-linear-gradient(180deg,transparent 0 calc(2.6cqw - 1px),rgba(44,74,126,.16) calc(2.6cqw - 1px) 2.6cqw),linear-gradient(90deg,transparent 3.2cqw,rgba(200,54,29,.35) 3.2cqw,rgba(200,54,29,.35) calc(3.2cqw + 2px),transparent calc(3.2cqw + 2px));display:flex;flex-direction:column;justify-content:center;gap:1.2cqw;padding-left:5cqw !important}
+.diary{overflow-y:auto !important;justify-content:flex-start !important;scrollbar-width:thin;scrollbar-color:rgba(120,90,50,.4) transparent;padding-top:3cqw !important;padding-bottom:4cqw !important}
+.diary .dy{flex:none}
+.diary .dy-text{font-size:max(14px,1.22cqw)}
+.diary .dy-date{font-size:max(14px,1.22cqw)}
+.dy-date{margin:0;font-family:'Patrick Hand',cursive;font-size:max(13px,1.12cqw);color:#C8361D}
+.dy-text{margin:.15cqw 0 0;white-space:pre-line;font-family:'Patrick Hand',cursive;font-size:max(13px,1.06cqw);line-height:1.42;color:#22305A}
 @media (max-width:820px){.note{height:auto;min-height:120px}.diary{padding-left:34px !important}}
 
 /* ===== Vòng soi UX 2 ===== */
@@ -418,7 +422,7 @@ class Component extends DCLogic {
       ['Đoàn quân áo dài', 'Tây Tiến', '#4E7A5A'], ['Thước phim', 'Ngày 21 tháng 6', '#2A1512'],
       ['Nhật ký mùa thi', 'Nhật ký Đặng Thùy Trâm', '#6B4A2B'], ['Tôi muốn tắt nắng đi', 'Vội vàng', '#2C4A7E'],
       ['Lớp Văn thầy Hoàng', 'Đàn ghi ta của Lorca', '#B0301F'], ['Bảng vàng', 'Bia Tiến sĩ', '#5E5A50'],
-      ['Những gương mặt', 'Rừng xà nu', '#6E1A12'], ['Mình về mình có nhớ ta', 'Việt Bắc', '#2C4A7E'],
+      ['Những gương mặt', 'Những ngôi sao xa xôi', '#6E1A12'], ['Mình về mình có nhớ ta', 'Việt Bắc', '#2C4A7E'],
       ['Thư gửi thầy', 'Những phong thư', '#B5852F'], ['Đề thi cuối cùng', 'Học trò ra đề', '#C8361D'],
       ['Học bạ của thầy', 'Học trò chấm điểm', '#22402F'], ['Cánh đồng phía trước', 'Cánh đồng bất tận', '#7A5B1E'],
       ['Thuyền ra khơi', 'Tràng giang', '#D9773A'],
@@ -517,12 +521,12 @@ class Component extends DCLogic {
       ['“Tiêu chuẩn vĩnh cửu của thơ ca là tình cảm.”', 'Bằng Việt', 'sky']
     ].map(([q, a, color], i) => ({ q, a, color, t: [-2, 2, -1.5, 1.5, 2.5, -2.5][i % 6], anim: ['pop', 'drop'][i % 2], d: (0.25 + i * 0.08).toFixed(2) }));
     const diary = [
-      ['Tháng 9 · 2024', 'Thầy viết lên bảng: “Nối tiếp các thế hệ Dòng chảy 9+”. Lần đầu nghe tên lớp, ai cũng cười. Không ngờ cái tên ấy theo mình cả năm.'],
-      ['Những sáng mùa đông', 'Năm giờ sáng, lớp tăng cường thầy dạy miễn phí đã đông 228 người. Trời còn tối, thầy vẫn chữa từng câu nghị luận. Tắt máy rồi mà đầu còn văng vẳng giọng thầy.'],
-      ['21 · 6 · 2025', 'Áo dài, hương trầm, Văn Miếu. Thầy mặc áo dài đỏ thêu rồng, dặn cả lớp cứ bình tĩnh mà viết.'],
-      ['Buổi học cuối cùng', 'Từ Văn Miếu về, cả lớp quây quần lần cuối: hoa trên bàn, đàn trên tay, chẳng ai muốn về.'],
-      ['26 · 6 · 2025 · 7 giờ 35', 'Phát đề Ngữ văn. Một trăm hai mươi phút. Tay run, nhưng mở bài vẫn có câu lý luận thầy dạy.'],
-      ['16 · 7 · 2025 · 8 giờ', 'Điểm thi công bố. Năm nay cả nước không ai đạt 10 môn Văn, điểm trung bình chỉ khoảng 7. Vậy mà lớp mình có 9.25, 9.5, 9.75. Cả buổi sáng, tin nhắn bay về máy thầy không ngớt.']
+      ["Mùa hè năm 2024", "Mùa hè năm ấy, các thuyền viên dần được thầy kết nạp, từ một nhóm nhỏ trò 12V1, đến khi cả dòng lớp nào cũng đông kín tới thiếu cả chỗ ngồi. Khoảnh khắc mới bước chân vào lớp, chúng em vẫn chưa hề biết những ngày sau của mình sẽ ấm áp và nhiệt huyết đến thế cho đến khi đắm mình vào dòng chảy 9+."],
+      ["Những buổi học mà chúng em cả đời không thể quên", "Tuy đúng ra là một tuần tụi con đi học lớp văn chính có 2 buổi thôi ạ, nhưng thật ra là cả tuần, cả ngày bọn con học văn. Mỗi sáng sớm 5h sáng, bọn con đã vội kéo nhau dậy vào lớp học online với thầy, rồi lên trường lại mở văn thầy ra làm bài tập (có bạn còn bị cô thu vở vì làm việc riêng😆), chiều về tíu tít tranh nhau vào lớp thầy học, tối về tụi con lại gọi nhau cùng làm bài tới tận đêm muộn thậm chí là sáng sớm. Rồi cả lớp HSA, SPT của thầy nữa, chẳng lớp nào là chúng con muốn bỏ lỡ. Và để tụi nhỏ này \"nghiện thầy\" đến vậy, chắc chắn là bởi tụi con biết, có thầy đang nỗ lực cùng chúng con. Văn hay không tự nhiên mà có, mà là hàng giờ lao lực đêm hôm thầy miệt mài đèn sách, là sức khỏe và tuổi trẻ của thầy chúng con, nên chúng con nghe viết không bỏ sót chữ nào."],
+      ["21/6/2025 - Lễ Dâng Hương tại Văn Miếu - Quốc Tử Giám", "Thầy ơi hôm đấy Văn Miếu mình đông như có idol quốc tế đến vậy, và đấy là chiếc sớ đỏ khổng lồ to nhất dài nhất đời con từng được thấy. Được thầy tỉ mỉ chuẩn bị, lên kế hoạch, dâng hương cầu may mắn và kết quả tốt cho chúng con, đây thật sự là một kim bài miễn tử, sự trấn an tinh thần rất lớn trước khi thi, biến chúng con từ lo sợ thành tin chắc chắn mình làm được."],
+      ["Buổi truyền giáo đầy đặc biệt", "Sau khi đi Văn Miếu về, chúng con có buổi học cuối, liên hoan và chuẩn bị sẵn sàng tinh thần để đi thi. Hôm đó, chúng em có cả những giọt nước mắt trong phút gần kề quyết định, nhưng hơn cả là những tiếng cười, những giọng hát vui vẻ hòa vang cùng nhau, những khoảnh khắc cả đời chẳng thể có cơ hội trải qua thêm lần nữa. Hơn cả một lớp học, đây là gia đình."],
+      ["7h30 26/6/2025, giây phút \"sinh tử\" chính thức diễn ra", "Ngày thi đã đến, khoảnh khắc cầm vào đề thi, chúng con đã thực sự nở một nụ cười tươi, thầm nghĩ: \"Cảm ơn cuộc đời, cảm ơn thầy, cảm ơn bố mẹ, cảm ơn bản thân vì đã nỗ lực, thời khắc tỏa sáng đã đến\". Chúng con viết nhoay nhoáy chiếc bút linC thầy tặng hết tờ này đến tờ khác, viết không thấy mỏi vì đã được thầy tôi luyện, xử lý ngon lành đề thi trong khi các đối thủ đang vò đầu bứt tai."],
+      ["8h 16/7/2025", "Điểm thi được công bố, chúng con không khỏi xúc động khi nhìn thấy thành quả của thầy và trò mình, nhanh tay soạn dòng dài báo thầy kết quả thi. Lúc này, chúng con hạnh phúc lắm, thầy ơi, cơn mưa 9+ rồi, ô kìa sao dòng mình nhiều thủ khoa thế.\nVà dù điểm số là bao nhiêu, chúng con vui lắm, bởi, chúng con đi thi không để chiến thắng bạn bên cạnh, hay để ganh đua với các đối thủ, mà hơn hết là chiến thắng chính mình. Từ một người không biết gì về văn, chán văn, không thuộc về văn, chúng con giờ hăng say đến thế vì biết: HỌC VĂN LÀ HỌC TẬP SỰ TỬ TẾ!"]
     ].map(([date, text], i) => ({ date, text, d: (0.25 + i * 0.22).toFixed(2) }));
     const words = [
       { word: 'Tử tế', quote: '“Học văn là học tập sự tử tế.”', label: 'Tấm lụa Tử tế: Học văn là học tập sự tử tế', d: '0.5' },
@@ -567,7 +571,10 @@ class Component extends DCLogic {
       { name: 'Chử Mỹ Dung', text: 'Con lại về rồi đâyyy. Thầy ơi hơn một năm qua tụi con đứa nào cũng làm được nhiều thứ và đã lớn hơn ạ. Nhưng con vẫn nhớ ngày nào còn tranh nhau vào lớp để kiếm chỗ đẹp nghe thầy giảng, ngày còn cười khúc khích trong lớp vì thầy trêu, ngày khóc nhè vì điểm chưa cao mà thầy dỗ không nín, và đó cũng chính là những năm tháng 17 tuổi đẹp nhất cả đời chẳng thể quên khi được đồng hành cùng thầy Hoàng và dòng chảy 9+. Con biết ơn thầy lắm, biết ơn vì mầm xanh yêu thương thầy gieo cho trò nhỏ này.' },
       { name: 'Nguyễn Kim Ngọc', text: 'Thầy ơi! Con Ngọc đâyyy. Cái đứa hay đến muộn ngồi cạnh Khánh Chi ạ. Nhờ những buổi học, những lời dạy của thầy mà con quyết định theo con đường nghề giáo để dạy cho các em tiểu học. Các em đáng yêu lắm ạ! Mới ngày nào xa thầy con là svien năm nhất giờ đã là năm hai nhưng con vẫn không thể nào quên những buổi học, buổi tổng ôn, luyện đề hay cả những lời dặn dò ân cần của thầy trước khi thi. Con cảm ơn thầy nhiều ạ! Cảm ơn thầy đã gieo những mầm xanh của tri thức của tình yêu thương nồng đậm cho dòng chảy 9+!' },
       { name: 'Vũ Phạm Thanh Vân', text: 'Con muốn gửi lời cảm ơn sâu sắc đến thầy Nguyễn Huy Hoàng- người thuyền trưởng đã chèo lái con thuyền đưa hàng bao thế hệ học sinh vượt thác ghềnh để đi đến dòng chảy 9+ thành công. Dòng chảy 9+ không chỉ là nơi thầy gieo những lời văn hay mà còn gieo những bài học cuộc sống ý nghĩa vào tâm trí học trò như câu nói muôn thuở” học văn là học tập sự tử tế”. Nhân ngày 20/11 con muốn chúc thầy tủi 18 luôn mạnh khỏe, rạng ngời, trẻ mãi, vui tươi để tiếp tục với sự nghiệp nghề giáo, hành trình thuyền trưởng để đưa các lứa học trò ,thuyền viên gặt hái được nhiều và nhiều hơn nữa những điểm 9+ ạ.' },
-      { name: 'Thầy ới ời ơi', text: 'Chúc thầy 20/11 vui vẻ, hạnh phúc và càng thành công trong công việc và cuộc sống' }
+      { name: 'Ngô Trung Đức', text: "Thầy Hoàng - người lái đò thầm lặng của Dòng chảy 9+, không chỉ truyền cho em ngọn lửa đam mê văn chương mà còn thổi hồn vào từng trang viết bằng sự nhiệt huyết và tâm huyết tột cùng. Mỗi bài giảng của thầy đã dìu dắt em qua những ngã rẽ bỡ ngỡ của tuổi học trò, khi em còn đang loay hoay với những bài giảng khô khan trên lớp. Dưới sự tận tụy ấy, văn học không chỉ là con chữ trên giấy mà đã trở thành nhịp đập cảm xúc, là hành trang để em tự tin bước đi trên con đường tương lai. Tri ân thầy Hoàng - người thầy đáng kính nhất của em. Học văn là học tập sự tử tế." },
+      { name: 'Lê Hải Hoàng', text: "Nhân dịp 20/11, con xin gửi đến thầy lời chúc luôn vững vàng và tận tâm với sự nghiệp trồng người, như thầy vẫn luôn như thế.\n\nThầy là bước ngoặt lớn nhất trong những năm tháng học trò của con. Điều quý giá nhất thầy trao cho con không chỉ là kiến thức, mà là một ngọn lửa: ngọn lửa của sự quyết tâm và nỗ lực. Lên đại học, con không còn dùng nhiều đến kiến thức văn học thầy dạy, nhưng ý chí và tinh thần nghiêm túc với việc học thì con vẫn luôn giữ mãi. Chính điều đó đã giúp con vượt qua kỳ thi đại học, và con tin sẽ còn đưa con đi xa hơn nữa.\n\nCon xin khoe với thầy một chút: con đã được vào lab và hiện đang thực tập tại một công ty công nghệ.\n\nCon cảm ơn thầy vì tất cả, cảm ơn cả lần thầy đèo con về tận nhà rồi lại vòng ngược về Mỹ Đình. Kỷ niệm ấy con vẫn nhớ mãi.\n\nKính chúc thầy thật nhiều sức khỏe, bình an và hạnh phúc." },
+      { name: 'Nguyễn Khánh Chi', text: "Gửi Thầy,\nCái hiu hiu lạnh của tháng 11 này khiến em nhớ đến tháng 11 của 2 năm trở về trước, khi chúng em vẫn còn là học sinh của Dòng chảy 9+. Một tối nọ khi đi học về, em chợt nghĩ sao trước đây mùa đông có lẽ không lạnh tới vậy, phải chăng do thời tiết thay đổi, hay do bên cạnh mình không còn những người bạn năm ấy tíu tít nô đùa trên đường tới lớp học nhà Thầy. Cũng có lẽ do lớp học luôn kín gió, hay nhờ vào sự ấm áp khi chúng em cùng chen chúc chia sẻ 1 chiếc bàn học. Hoặc có lẽ, sự ấm áp này không chỉ đến từ yếu tố bên ngoài, mà đến từ chính sự nhiệt huyết, từ tinh thần học tập kiên trì, bên bỉ mà thầy tôi luyện cho chúng em…\n\nĐã rất lâu kể từ ngày nói lời tạm biệt với Dòng chảy, thế nhưng, những giá trị em nhận được từ Thầy và các bạn chưa bao giờ mai một trong em. Một lần nữa bước vào tháng 11 - tháng tri ân những người thầy, người cô đáng kính, em xin gửi lời cảm ơn chân thành tới Thầy, em chúc Thầy luôn mạnh khoẻ để ngọn lửa rực cháy trong Thầy sẽ thắp sáng những ngọn đuốc luôn vươn mình vế phía ánh sáng là lớp lớp học trò chúng em.\n\nChúng em yêu Thầy bằng tất cả sự ấm áp dành dụm trong tiết đông giá lạnh, mong rằng sẽ ủ ấm phần nào đó cho Dòng chảy 9+!" },
+      { name: 'Thầy ới ời ơi', text: "Em chào thầy! Không biết thầy có biết em là ai không, nhưng em có thể xem là 1 trong những người tham gia dòng chảy 9+ muộn nhất. Bắt đầu vào tháng 3/2025, sau khi chuyển hướng từ hội họa sang thi đại học bình thường thì e được bạn bè giới thiệu đến với thầy, lúc ấy chỉ còn 3 tháng nữa là đã thi rồi. Thật may mắn làm sao, dù biết lớp đã đông nhưng e vẫn thử nhắn cho thầy, và cuối cùng đã được nhận vào. Chỉ 1 khoảng thời gian ngắn đồng hành cùng nhau thôi nhưng thầy đã dạy cho e rất nhiều điều. Cho tới hôm vừa thi xong THPT, e đang hoang mang vì không biết mình đã làm đúng chưa, nhưng rồi thầy đã giải đáp cho em, kèm theo câu nói \"con bị hâm à\"x2 lần. Dù sao đi nữa, e vẫn luôn trân trọng và nhớ những gì đã học được trong khoảng thời gian cùng đồng hành với dòng chảy. Và tới hôm nay, cũng đã sắp 20/11, e chúc thầy ngày càng thành công trong sự nghiệp trồng người, có nhiều hạnh phúc và vui vẻ trong cuộc sống.", imgs: ['assets/img/chat-thay-1.jpg', 'assets/img/chat-thay-2.jpg'] }
     ];
     const anims = ['pop', 'drop', 'fromR', 'pop'];
     const letters = raw.map((l, i) => ({ ...l, anim: anims[i % 4], d: (0.2 + i * 0.09).toFixed(2), open: () => this.setState({ open: i }) }));
@@ -651,7 +658,7 @@ class Component extends DCLogic {
       },
       hasOpen: this.state.open >= 0,
       openName: cur ? cur.name : '',
-      openText: cur ? cur.text : '',
+      openText: cur ? cur.text : '', openImgs: cur && cur.imgs ? cur.imgs : [],
       close: () => this.setState({ open: -1 }),
       spinCls: this.state.playing ? 'spin' : '',
       playLabel: this.state.playing ? 'Đang phát… (bấm để dừng)' : 'Bật băng nghe bài hát',
@@ -972,7 +979,7 @@ ${(s11) ? html`<div class="spread ${k11}">
 <div class="a fromL" style="--d: .55s; width: 46%; margin: 1.6cqw 0 0 6%"><figure class="pol" style="--t: -3deg"><span class="tape top t-sun"></span><img src="assets/img/thay-thu-vien.jpg" alt="Thầy ngồi giữa giá sách" style="aspect-ratio: 4 / 3" /><figcaption>Thầy giữa những trang sách</figcaption></figure></div>
 <span class="pgno">21</span>
 </div>
-<div class="pg pgR diary">
+<div class="pg pgR diary" style="background-color: #FBF6EA">
 ${(diary || []).map((dy, $index) => html`<div class="dy a up" style="--d: ${dy.d}s"><p class="dy-date">${dy.date}</p><p class="dy-text">${dy.text}</p></div>`)}
 <span class="pgno">22</span>
 </div>
@@ -1065,11 +1072,10 @@ ${(honors || []).map((h, $index) => html`<div class="a stand" style="--d: ${h.d}
 
 ${(s15) ? html`<div class="spread ${k15}">
 <div class="pg pgL dk" style="background-color: #6E1A12; color: #FBE6BE">
-<p class="kicker a up" style="color: #F2C063">“Rừng xà nu” — Nguyễn Trung Thành</p>
-<div class="deco a pop hide-m" style="--d: .6s; right: 2.4cqw; top: 1.6cqw; width: 8.5cqw"><img class="stk wig bob" src="assets/img/cay-xa-nu.png" alt="Sticker cây xà nu" /></div>
+<p class="kicker a up" style="color: #F2C063">“Những ngôi sao xa xôi” — Lê Minh Khuê</p>
 <div class="persp"><h2 class="h2 a stand" style="--d: .1s">Những gương mặt<br />Dòng chảy 9+</h2></div>
-<p class="txt a up" style="--d: .25s; color: #F3D9B8">Trong “Rừng xà nu”, cạnh một cây xà nu ngã xuống đã có bốn năm cây con mọc lên, cứ thế nối nhau thành rừng. Lớp Văn của thầy cũng thế: khoá trước vững vàng thì khoá sau vươn lên. Mỗi gương mặt ở đây là một cây xà nu non đã đứng thẳng giữa mùa thi 2025.</p>
-<div class="a fromL" style="--d: .5s; width: 76%; margin: 2.2cqw 0 0 4%"><figure class="pol" style="--t: -2.5deg"><span class="tape top t-sun"></span><img src="assets/img/doan-quan-bang-ron.jpg" alt="Cả lớp chụp ảnh cùng thầy trước điện Văn Miếu" style="aspect-ratio: 3 / 2" /><figcaption>Lớp thầy có 300 người, chúng con chỉ là một góc nhỏ</figcaption></figure></div>
+<p class="txt a up" style="--d: .25s; color: #F3D9B8">Trong “Những ngôi sao xa xôi”, ba cô gái tổ trinh sát mặt đường mỗi người một tính, vậy mà cùng nhau sáng lên giữa những đêm bom đạn. Lớp thầy có hơn 300 học trò, chúng con chỉ là một nhóm nhỏ, mỗi gương mặt một dáng vẻ, nhưng cùng sáng lên trong mùa thi 2025, nhờ có nhau và nhờ có thầy.</p>
+<div class="a fromL" style="--d: .5s; width: 68%; margin: 1.6cqw 0 0 8%"><figure class="pol" style="--t: -2.5deg"><span class="tape top t-sun"></span><img src="assets/img/doan-quan-bang-ron.jpg" alt="Cả lớp chụp ảnh cùng thầy trước điện Văn Miếu" style="aspect-ratio: 3 / 2" /><figcaption>Lớp thầy có hơn 300 người, chúng con chỉ là một góc nhỏ</figcaption></figure></div>
 <p class="hand a up" style="--d: .9s; margin: 1.6cqw 0 0; font-size: var(--cap); color: #F2C063">“Thơ là viên kim cương lấp lánh dưới ánh mặt trời” (Sóng Hồng). Mỗi gương mặt ở đây cũng lấp lánh như thế. Bấm vào để xem rõ.</p>
 <span class="pgno">29</span>
 </div>
@@ -1109,7 +1115,7 @@ ${(s17) ? html`<div class="spread ${k17}">
 <div class="pg pgL tex" style="background-color: #F1DFB6">
 <p class="kicker a up" style="color: #7A5214">những phong thư</p>
 <div class="persp"><h2 class="h2 a stand" style="--d: .1s; color: #3B2A12">Thư gửi thầy</h2></div>
-<p class="txt a up" style="--d: .2s">Có những điều nói trực tiếp thì ngại, nên chúng con viết. Bốn lá thư dưới đây là của Mỹ Dung, Kim Ngọc, Thanh Vân và một bạn xin giấu tên, nhưng cũng là lời của cả lớp gửi thầy. Chế Lan Viên bảo thơ cần có hình, có ý và có tình. Thư của chúng con có thể vụng về hình và ý, nhưng tình thì đầy.</p>
+<p class="txt a up" style="--d: .2s">Có những điều nói trực tiếp thì ngại, nên chúng con viết. Bảy lá thư dưới đây là của Mỹ Dung, Kim Ngọc, Thanh Vân, Trung Đức, Hải Hoàng, Khánh Chi và một bạn xin giấu tên, nhưng cũng là lời của cả lớp gửi thầy. Chế Lan Viên bảo thơ cần có hình, có ý và có tình. Thư của chúng con có thể vụng về hình và ý, nhưng tình thì đầy.</p>
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.4cqw; margin-top: 3cqw; padding: 0 1cqw">
 <div class="a fromL" style="--d: .3s"><figure class="pol" style="--t: -3deg"><img src="assets/img/kep-do.png" alt="" style="position: absolute; top: -2.4cqw; left: 1.6cqw; width: 2.6cqw; z-index: 4; object-fit: contain" /><img src="assets/img/anh-531107985.jpg" alt="Lá thư viết tay gửi thầy" style="aspect-ratio: 3 / 4; object-position: 50% 70%" /><figcaption>“Hãy nói lời yêu thật nhiều…”</figcaption></figure></div>
 <div class="a fromL" style="--d: .5s; margin-top: 3cqw"><figure class="pol" style="--t: 3deg"><img src="assets/img/kep-go.png" alt="" style="position: absolute; top: -2.8cqw; left: 50%; width: 2.8cqw; translate: -50% 0; z-index: 4; object-fit: contain" /><img src="assets/img/anh-486700578.jpg" alt="Tin nhắn báo thầy đã thi xong" style="aspect-ratio: 3 / 4; object-position: 50% 0" /><figcaption>“Trò của thầy thi xong rùi ạ”</figcaption></figure></div>
@@ -1119,13 +1125,13 @@ ${(s17) ? html`<div class="spread ${k17}">
 </div>
 <div class="pg pgR tex" style="background-color: #F1DFB6; display: flex; flex-direction: column">
 <p class="hand a up" style="margin: 0; font-size: var(--k); color: #6B5229">Rê chuột để hé thư, bấm để đọc trọn.</p>
-<div class="one-letter" style="flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: center; align-items: center; gap: 2.4cqw 2cqw; margin-top: 1.2cqw; padding: 0 1cqw 1.4cqw">
+<div class="one-letter" style="flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-content: center; align-items: center; gap: 2.6cqw 1.4cqw; margin-top: 1.2cqw; padding: 0 1cqw 1.4cqw">
 ${(letters || []).map((lt, $index) => html`<div class="a ${lt.anim}" style="--d: ${lt.d}s; width: 100%">
 <button type="button" class="env" onClick=${lt.open} aria-label="Mở thư: ${lt.name}">
 <span class="body"></span><span class="letter">Kính gửi thầy…</span><span class="pocket"></span><span class="flap"></span><span class="seal">9+</span><span class="who">${lt.name}</span>
 </button>
 </div>`)}
-<div class="a pop" style="--d: 1.2s; width: 12%; grid-column: 1 / -1; justify-self: end; margin-top: -3cqw"><img class="stk wig" src="assets/img/hd-am-tra.png" alt="Sticker ấm trà" /></div>
+<div class="a pop" style="--d: 1.2s; width: 9%; grid-column: 1 / -1; justify-self: end; margin-top: -2cqw"><img class="stk wig" src="assets/img/hd-am-tra.png" alt="Sticker ấm trà" /></div>
 </div>
 <span class="pgno">34</span>
 </div>
@@ -1318,6 +1324,7 @@ ${(hasOpen) ? html`<div style="position: fixed; inset: 0; z-index: 80; backgroun
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 <p style="font-family: 'Dancing Script', cursive; font-size: 32px; margin: 0 0 14px">Kính gửi thầy Hoàng,</p>
 <p class="hand" style="margin: 0; font-size: 22px; line-height: 34px; white-space: pre-line">${openText}</p>
+<div style="display: flex; gap: 12px; justify-content: center; margin-top: 22px">${(openImgs || []).map((im, $index) => html`<img src=${im} alt="Ảnh tin nhắn đính kèm thư" style="width: 46%; height: auto; display: block; border: 1px solid #D9C9A8; box-shadow: 0 4px 10px rgba(0,0,0,.2)" />`)}</div>
 <p style="font-family: 'Dancing Script', cursive; font-size: 28px; text-align: right; margin: 24px 0 0; color: #C8361D">— ${openName}</p>
 </article>
 </div>` : null}
