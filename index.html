@@ -9,7 +9,7 @@
 <meta property="og:description" content="Ai đã đặt tên cho dòng chảy? Scrapbook của lớp 12V1 gửi thầy nhân ngày 20/11.">
 <meta property="og:image" content="assets/img/anh-510408850.jpg">
 <link rel="icon" href="assets/img/con-dau.png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&amp;family=Lora:ital,wght@0,400;0,500;1,400&amp;family=Dancing+Script:wght@700&amp;family=Patrick+Hand&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&amp;family=Lora:ital,wght@0,400;0,500;1,400&amp;family=Dancing+Script:wght@700&amp;family=Patrick+Hand&amp;family=Playwrite+VN:wght@100..400&amp;display=swap">
 <style>
 body{margin:0;background:#C9AE82}
 .stage{background:#C9AE82 url(assets/img/nen-kraft.jpg) center/900px repeat}
@@ -296,6 +296,7 @@ body{margin:0;background:#C9AE82}
 .opts{grid-template-columns:1fr}
 .exam-h{grid-template-columns:1fr}
 .chat{justify-content:flex-start}
+.pw .poster img{aspect-ratio:1 / 1;height:auto;width:100%;object-fit:contain;background:#7a1c13}
 .fill .poster img{aspect-ratio:1 / 1;height:auto}
 .pol.tall{height:auto}.pol.tall img{height:auto;aspect-ratio:3 / 4}
 }
@@ -311,9 +312,9 @@ body{margin:0;background:#C9AE82}
 .note .pin{position:absolute;top:-.6cqw;left:50%;width:1.6cqw;height:1.6cqw;min-width:14px;min-height:14px;translate:-50% 0;border-radius:50%;background:#C8361D;box-shadow:0 2px 4px rgba(0,0,0,.35),inset -2px -2px 0 rgba(0,0,0,.2)}
 .nq{font-family:'Fraunces',serif;font-style:italic;font-size:max(14px,1.22cqw);line-height:1.35;color:#2A231C;white-space:pre-line}
 .na{font-family:'Patrick Hand',cursive;font-size:max(13px,1.1cqw);color:#9A3B1E;text-align:right}
-.diary{background-image:repeating-linear-gradient(180deg,transparent 0 calc(2.6cqw - 1px),rgba(44,74,126,.16) calc(2.6cqw - 1px) 2.6cqw),linear-gradient(90deg,transparent 3.2cqw,rgba(200,54,29,.35) 3.2cqw,rgba(200,54,29,.35) calc(3.2cqw + 2px),transparent calc(3.2cqw + 2px));display:flex;flex-direction:column;justify-content:center;gap:1.2cqw;padding-left:5cqw !important}
-.dy-date{margin:0;font-family:'Patrick Hand',cursive;font-size:max(15px,1.35cqw);color:#C8361D}
-.dy-text{margin:.2cqw 0 0;font-family:'Patrick Hand',cursive;font-size:max(15px,1.3cqw);line-height:1.5;color:#22305A}
+.diary{position:relative;background-color:#E6CF98 !important;background-image:url(assets/img/giay-ke-ngang.jpg) !important;background-size:100% auto !important;background-position:center top !important;background-blend-mode:multiply;box-shadow:inset 0 0 3cqw rgba(110,70,20,.35);display:flex;flex-direction:column;justify-content:center;gap:.8cqw;padding:3.4cqw 3.4cqw 3.4cqw 6.4cqw !important}
+.dy-date{margin:0;font-family:'Playwrite VN','Dancing Script',cursive;font-weight:400;font-size:max(13px,1.12cqw);color:#8A3322}
+.dy-text{margin:.15cqw 0 0;font-family:'Playwrite VN','Dancing Script',cursive;font-weight:300;font-size:max(13px,1.12cqw);line-height:1.65;color:#2B2868}
 @media (max-width:820px){.note{height:auto;min-height:120px}.diary{padding-left:34px !important}}
 
 /* ===== Vòng soi UX 2 ===== */
@@ -443,6 +444,7 @@ class Component extends DCLogic {
       ['assets/img/vd-tran-quang-anh-1.jpg', 'Trần Quang Anh · 9'], ['assets/img/vd-nguyen-kim-ngoc.jpg', 'Nguyễn Kim Ngọc · 9.25'],
       ['assets/img/vd-nguyen-khanh-chi.jpg', 'Nguyễn Khánh Chi · 9'], ['assets/img/vd-nguyen-duy-bao.jpg', 'Nguyễn Duy Bảo · 8.25'],
       ['assets/img/vd-khuc-thanh-cong.jpg', 'Khúc Thành Công · 9.25'], ['assets/img/vd-tran-quang-anh-2.jpg', 'Trần Quang Anh · 9'],
+      ['assets/img/poster-anh-kiet.jpg', 'Nguyễn Anh Kiệt · 9'],
       ['assets/img/poster-thanh-van.jpg', 'Vũ Phạm Thanh Vân · 9.25']
     ].map(([src, cap], i) => ({ src, cap, d: (0.25 + i * 0.07).toFixed(2), anim: ['pop', 'drop', 'pop'][i % 3], zoom: zoomOf(src, cap) }));
     const scores = [
@@ -516,7 +518,7 @@ class Component extends DCLogic {
     ].map(([q, a, color], i) => ({ q, a, color, t: [-2, 2, -1.5, 1.5, 2.5, -2.5][i % 6], anim: ['pop', 'drop'][i % 2], d: (0.25 + i * 0.08).toFixed(2) }));
     const diary = [
       ['Tháng 9 · 2024', 'Thầy viết lên bảng: “Nối tiếp các thế hệ Dòng chảy 9+”. Lần đầu nghe tên lớp, ai cũng cười. Không ngờ cái tên ấy theo mình cả năm.'],
-      ['Những tối mùa đông', 'Lớp online đông 228 người. Mười giờ đêm thầy vẫn chữa từng câu nghị luận. Tắt máy rồi mà đầu còn văng vẳng giọng thầy.'],
+      ['Những sáng mùa đông', 'Năm giờ sáng, lớp tăng cường thầy dạy miễn phí đã đông 228 người. Trời còn tối, thầy vẫn chữa từng câu nghị luận. Tắt máy rồi mà đầu còn văng vẳng giọng thầy.'],
       ['21 · 6 · 2025', 'Áo dài, hương trầm, Văn Miếu. Thầy mặc áo dài đỏ thêu rồng, dặn cả lớp cứ bình tĩnh mà viết.'],
       ['Buổi học cuối cùng', 'Từ Văn Miếu về, cả lớp quây quần lần cuối: hoa trên bàn, đàn trên tay, chẳng ai muốn về.'],
       ['26 · 6 · 2025 · 7 giờ 35', 'Phát đề Ngữ văn. Một trăm hai mươi phút. Tay run, nhưng mở bài vẫn có câu lý luận thầy dạy.'],
@@ -549,7 +551,7 @@ class Component extends DCLogic {
     ].map((l, i) => ({ ...l, d: (0.2 + i * 0.15).toFixed(2) }));
     const honors = [
       ['Chử Mỹ Dung', '9.25'], ['Nguyễn Kim Ngọc', '9.25'], ['Khúc Thành Công', '9.25'], ['Vũ Phạm Thanh Vân', '9.25'],
-      ['Ngô Trung Đức', '9'], ['Lê Hải Hoàng', '9'], ['Dương Quang Anh', '9'],
+      ['Ngô Trung Đức', '9'], ['Nguyễn Anh Kiệt', '9'], ['Lê Hải Hoàng', '9'], ['Dương Quang Anh', '9'],
       ['Nguyễn Khánh Chi', '9'], ['Trần Quang Anh', '9'],
       ['Phạm Quang Minh', '8.5'], ['Nguyễn Duy Bảo', '8.25']
     ].map(([name, score], i) => ({ name, score, d: (0.15 + i * 0.08).toFixed(2) }));
@@ -592,7 +594,7 @@ class Component extends DCLogic {
       ...flags,
       notesL: NOTES.slice(0, 2), notesR: NOTES.slice(2), diary,
       titleWords, words, scores, chats, grades, dots, fall,
-      postersL: posters.slice(0, 4), postersR: posters.slice(4),
+      postersL: [], postersR: posters,
       quizL: quiz.slice(0, 3), quizR: quiz.slice(3),
       quizDone, quizPending: !quizDone, quizLeft: QUIZ.length - quizRight, quizScore: '10',
       quizComment: !this.state.quizMiss ? 'Thầy thuộc bài hơn cả chúng con. Xuất sắc!' : 'Có câu chọn lại mới đúng, nhưng người ra đề thương thầy nên vẫn cho 10.',
@@ -826,7 +828,7 @@ ${(s5) ? html`<div class="spread ${k5}">
 <div class="pg pgL dk" style="background-color: #1B2747; color: #EFE3C8">
 <p class="kicker a up" style="color: #F2C063">“Hai đứa trẻ” — Thạch Lam</p>
 <div class="persp"><h2 class="h2 a stand" style="--d: .1s">Ngọn đèn<br />những tối ôn thi</h2></div>
-<p class="txt a up" style="--d: .25s; color: #DCD3C0">Liên và An thức đợi chuyến tàu đêm chỉ để nhìn thấy một chút ánh sáng từ thế giới khác. Những tối ôn thi, chúng con cũng thức: đợi hết ca học, đợi bài chữa, đợi một dòng nhận xét của thầy. Có hôm lớp online đông tới 228 người, mười giờ đêm màn hình vẫn sáng. Có hôm tan học, cả đám đi xe máy về qua phố vắng, đèn đường vàng như ngọn đèn chợ huyện. Thầy là ngọn đèn ấy: nhỏ thôi, nhưng đủ để chúng con không thấy mình lạc.</p>
+<p class="txt a up" style="--d: .25s; color: #DCD3C0">Liên và An thức đợi chuyến tàu đêm chỉ để nhìn thấy một chút ánh sáng từ thế giới khác. Những ngày gần thi, chúng con cũng thức: đợi hết ca học, đợi bài chữa, đợi một dòng nhận xét của thầy. Thầy còn mở lớp học tăng cường miễn phí cho cả lớp, 5 giờ sáng mỗi ngày, có buổi online đông tới 228 người. Có hôm tan học muộn, đoạn đường về tối om, thầy bật đèn ô tô rọi sáng cho cả đám đi xe máy về. Thầy là ngọn đèn ấy: nhỏ thôi, nhưng đủ để chúng con không thấy mình lạc.</p>
 <div class="a pop" style="--d: .45s; display: flex; align-items: center; gap: 2cqw; margin-top: 2cqw">
 <div class="lamp" style="width: 8cqw; min-width: 70px; flex: none"><img class="stk bob" src="assets/img/den-dau.png" alt="Sticker ngọn đèn dầu" /></div>
 <div class="sticky hand" style="--t: -3deg; font-size: var(--k); color: #3B2A12">“Một nhà văn thiên tài là một người muốn cảm nhận mọi vẻ đẹp man mác của vũ trụ.” — Thạch Lam</div>
@@ -837,8 +839,8 @@ ${(s5) ? html`<div class="spread ${k5}">
 <div class="pg pgR dk" style="background-color: #1B2747; color: #EFE3C8">
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6cqw">
 <div class="a fromR" style="--d: .2s"><figure class="pol" style="--t: 3deg"><span class="tape top t-sun"></span><img src="assets/img/anh-536997708.jpg" alt="Đoàn xe máy đi học về trong đêm" style="aspect-ratio: 4 / 4.4" /><figcaption>Đường về sau giờ học</figcaption></figure></div>
-<div class="a fromR" style="--d: .35s; margin-top: 3cqw"><figure class="pol" style="--t: -4deg"><span class="tape top t-ink"></span><img src="assets/img/anh-513079037.jpg" alt="Thầy dạy online với 228 người tham gia" style="aspect-ratio: 4 / 4.4" /><figcaption>228 người cùng thức</figcaption></figure></div>
-<div class="a up" style="--d: .5s; grid-column: span 2"><figure class="pol" style="--t: -1deg"><span class="tape tl t-pink"></span><span class="tape tr t-mint"></span><img src="assets/img/anh-537012767.jpg" alt="Những ngọn đèn xe trên đường về" style="aspect-ratio: 16 / 5.4" /><figcaption>Những ngọn đèn nhỏ trên phố</figcaption></figure></div>
+<div class="a fromR" style="--d: .35s; margin-top: 3cqw"><figure class="pol" style="--t: -4deg"><span class="tape top t-ink"></span><img src="assets/img/anh-513079037.jpg" alt="Lớp học tăng cường lúc 5 giờ sáng với 228 người tham gia" style="aspect-ratio: 4 / 4.4" /><figcaption>5 giờ sáng · 228 người</figcaption></figure></div>
+<div class="a up" style="--d: .5s; grid-column: span 2"><figure class="pol" style="--t: -1deg"><span class="tape tl t-pink"></span><span class="tape tr t-mint"></span><img src="assets/img/anh-537012767.jpg" alt="Đèn ô tô của thầy rọi sáng đường về" style="aspect-ratio: 16 / 5.4" /><figcaption>Đèn ô tô thầy rọi đường về</figcaption></figure></div>
 </div>
 <div class="deco a pop hide-m" style="--d: .8s; right: 1cqw; top: 1cqw; width: 12cqw"><img class="stk wig" src="assets/img/xe-may-dem.png" alt="Sticker ba bạn đi xe máy về đêm" /></div>
 <span class="pgno">10</span>
@@ -851,7 +853,7 @@ ${(s6) ? html`<div class="spread ${k6}">
 <div class="persp"><h2 class="h2 a stand" style="--d: .1s; color: #3B2A12">Lớp học là nơi<br />ta hò hẹn</h2></div>
 <p class="txt a up" style="--d: .25s">Nguyễn Khoa Điềm viết rằng Đất Nước có trong mỗi chúng ta, trong những điều bình dị nhất. Lớp Văn của thầy cũng vậy: là căn phòng chật kín người, là tiếng cười khi thầy pha trò giữa giờ chữa đề, là chiếc khẩu trang đeo vội lúc tan học, là cuốn Chốt hạ 9+ đứa nào cũng ôm khư khư như báu vật.</p>
 <div class="sticky hand a pop" style="--d: .45s; --t: 2deg; margin-top: 1.4cqw; font-size: var(--k); color: #3B2A12">“Trong anh và em hôm nay / Đều có một phần Đất Nước.” Trong mỗi đứa chúng con, đều có một phần lớp Văn.</div>
-<div class="a fromL" style="--d: .6s; width: 64%; margin: 2cqw 0 0 6%"><figure class="pol" style="--t: -3deg"><span class="tape top t-pink"></span><img src="assets/img/lop-selfie.jpg" alt="Thầy chụp ảnh tự sướng cùng các bạn trong lớp" style="aspect-ratio: 16 / 10" /><figcaption>Giờ tan học</figcaption></figure></div>
+<div style="display: flex; gap: 2cqw; align-items: flex-start; margin: 2cqw 0 0"><div class="a fromL" style="--d: .6s; flex: 1"><figure class="pol" style="--t: -3deg"><span class="tape top t-pink"></span><img src="assets/img/lop-selfie.jpg" alt="Thầy chụp ảnh tự sướng cùng các bạn trong lớp" style="aspect-ratio: 4 / 3" /><figcaption>Giờ tan học</figcaption></figure></div><div class="a fromL" style="--d: .75s; flex: 1; margin-top: 2.6cqw"><figure class="pol" style="--t: 3deg"><span class="tape top t-mint"></span><img src="assets/img/selfie-sau-gio-hoc.jpg" alt="Thầy trò chụp ảnh sau giờ tan học" style="aspect-ratio: 4 / 3" /><figcaption>Thầy trò sau giờ học</figcaption></figure></div></div>
 <span class="pgno">11</span>
 </div>
 <div class="pg pgR tex" style="background-color: #F3E3C3">
@@ -970,7 +972,7 @@ ${(s11) ? html`<div class="spread ${k11}">
 <div class="a fromL" style="--d: .55s; width: 46%; margin: 1.6cqw 0 0 6%"><figure class="pol" style="--t: -3deg"><span class="tape top t-sun"></span><img src="assets/img/thay-thu-vien.jpg" alt="Thầy ngồi giữa giá sách" style="aspect-ratio: 4 / 3" /><figcaption>Thầy giữa những trang sách</figcaption></figure></div>
 <span class="pgno">21</span>
 </div>
-<div class="pg pgR diary" style="background-color: #FBF6EA">
+<div class="pg pgR diary">
 ${(diary || []).map((dy, $index) => html`<div class="dy a up" style="--d: ${dy.d}s"><p class="dy-date">${dy.date}</p><p class="dy-text">${dy.text}</p></div>`)}
 <span class="pgno">22</span>
 </div>
@@ -1007,7 +1009,7 @@ ${(s13) ? html`<div class="spread ${k13}">
 <div class="persp"><h2 class="h2 a stand" style="--d: .1s">Lớp Văn thầy Hoàng</h2></div>
 <p class="hand a up" style="--d: .2s; margin: .6cqw 0 0; font-size: var(--k); color: #F1CFB0">li-la li-la li-la… thành 9+ 9+ 9+</p>
 <p class="hand a up" style="--d: .22s; margin: .4cqw 0 0; font-size: var(--cap); color: #F2C063">“Thơ là âm nhạc của tâm hồn, nhất là những tâm hồn cao cả, đa cảm.” — Voltaire</p>
-<p class="txt a up" style="--d: .25s; color: #F8E7C4">Thanh Thảo viết về tiếng đàn của Lorca, tiếng đàn còn ngân mãi kể cả khi người nghệ sĩ đã đi xa. Lớp mình cũng có một tiếng đàn như thế: bài hát “Lớp Văn thầy Hoàng” chúng con viết tặng thầy, gói lại những điều thầy dạy, rằng văn chương là chiếc cầu, là nhân văn, là cách để hiểu nhau.</p>
+<p class="txt a up" style="--d: .25s; color: #F8E7C4">Thanh Thảo viết về tiếng đàn của Lorca, tiếng đàn còn ngân mãi kể cả khi người nghệ sĩ đã đi xa. Lớp mình cũng có một tiếng đàn như thế: bài hát “Lớp Văn thầy Hoàng” do chính thầy viết tặng chúng con, gói lại những điều thầy dạy, rằng văn chương là chiếc cầu, là nhân văn, là cách để hiểu nhau.</p>
 <div style="display: flex; gap: 2cqw; align-items: center; margin-top: 1.6cqw">
 <div class="a fromL" style="--d: .35s; flex: 0 0 34%"><img class="stk wig" src="assets/img/dan-ghita.png" alt="Sticker đàn ghi ta" /></div>
 <div class="a bob" style="flex: 0 0 9%"><img class="stk" src="assets/img/not-nhac.png" alt="" /></div>
@@ -1067,15 +1069,13 @@ ${(s15) ? html`<div class="spread ${k15}">
 <div class="deco a pop hide-m" style="--d: .6s; right: 2.4cqw; top: 1.6cqw; width: 8.5cqw"><img class="stk wig bob" src="assets/img/cay-xa-nu.png" alt="Sticker cây xà nu" /></div>
 <div class="persp"><h2 class="h2 a stand" style="--d: .1s">Những gương mặt<br />Dòng chảy 9+</h2></div>
 <p class="txt a up" style="--d: .25s; color: #F3D9B8">Trong “Rừng xà nu”, cạnh một cây xà nu ngã xuống đã có bốn năm cây con mọc lên, cứ thế nối nhau thành rừng. Lớp Văn của thầy cũng thế: khoá trước vững vàng thì khoá sau vươn lên. Mỗi gương mặt ở đây là một cây xà nu non đã đứng thẳng giữa mùa thi 2025.</p>
-<div class="fill" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4cqw; margin-top: 1.4cqw; width: 54%">
-${(postersL || []).map((ps, $index) => html`<div class="a pop" style="--d: ${ps.d}s"><button type="button" class="zoomable poster" onClick=${ps.zoom} aria-label="Phóng to ${ps.cap}"><img src=${ps.src} alt=${ps.cap} /></button></div>`)}
-</div>
+<div class="a fromL" style="--d: .5s; width: 76%; margin: 2.2cqw 0 0 4%"><figure class="pol" style="--t: -2.5deg"><span class="tape top t-sun"></span><img src="assets/img/doan-quan-bang-ron.jpg" alt="Cả lớp chụp ảnh cùng thầy trước điện Văn Miếu" style="aspect-ratio: 3 / 2" /><figcaption>Lớp thầy có 300 người, chúng con chỉ là một góc nhỏ</figcaption></figure></div>
 <p class="hand a up" style="--d: .9s; margin: 1.6cqw 0 0; font-size: var(--cap); color: #F2C063">“Thơ là viên kim cương lấp lánh dưới ánh mặt trời” (Sóng Hồng). Mỗi gương mặt ở đây cũng lấp lánh như thế. Bấm vào để xem rõ.</p>
 <span class="pgno">29</span>
 </div>
 <div class="pg pgR dk" style="background-color: #6E1A12; color: #FBE6BE; display: flex; flex-direction: column">
-<div class="fill" style="flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 1.4cqw 1.4cqw; padding: .4cqw 0 2cqw">
-${(postersR || []).map((ps, $index) => html`<div class="a ${ps.anim}" style="--d: ${ps.d}s"><button type="button" class="zoomable poster" onClick=${ps.zoom} aria-label="Phóng to ${ps.cap}"><img src=${ps.src} alt=${ps.cap} /></button></div>`)}
+<div class="pw" style="flex: 1; min-height: 0; display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: 1.2cqw 1.6cqw; padding: .2cqw 0 1.6cqw">
+${(postersR || []).map((ps, $index) => html`<div class="a ${ps.anim}" style="--d: ${ps.d}s; width: calc((100% - 3.2cqw) / 3)"><button type="button" class="zoomable poster" onClick=${ps.zoom} aria-label="Phóng to ${ps.cap}" style="display: block; width: 100%"><img src=${ps.src} alt=${ps.cap} /></button></div>`)}
 </div>
 <span class="pgno">30</span>
 </div>
