@@ -563,7 +563,9 @@ class Component extends DCLogic {
     ].map((f, i) => ({ ...f, d: (0.25 + i * 0.15).toFixed(2) }));
     const raw = [
       { name: 'Chử Mỹ Dung', text: 'Con lại về rồi đâyyy. Thầy ơi hơn một năm qua tụi con đứa nào cũng làm được nhiều thứ và đã lớn hơn ạ. Nhưng con vẫn nhớ ngày nào còn tranh nhau vào lớp để kiếm chỗ đẹp nghe thầy giảng, ngày còn cười khúc khích trong lớp vì thầy trêu, ngày khóc nhè vì điểm chưa cao mà thầy dỗ không nín, và đó cũng chính là những năm tháng 17 tuổi đẹp nhất cả đời chẳng thể quên khi được đồng hành cùng thầy Hoàng và dòng chảy 9+. Con biết ơn thầy lắm, biết ơn vì mầm xanh yêu thương thầy gieo cho trò nhỏ này.' },
-      { name: 'Nguyễn Kim Ngọc', text: 'Thầy ơi! Con Ngọc đâyyy. Cái đứa hay đến muộn ngồi cạnh Khánh Chi ạ. Nhờ những buổi học, những lời dạy của thầy mà con quyết định theo con đường nghề giáo để dạy cho các em tiểu học. Các em đáng yêu lắm ạ! Mới ngày nào xa thầy con là svien năm nhất giờ đã là năm hai nhưng con vẫn không thể nào quên những buổi học, buổi tổng ôn, luyện đề hay cả những lời dặn dò ân cần của thầy trước khi thi. Con cảm ơn thầy nhiều ạ! Cảm ơn thầy đã gieo những mầm xanh của tri thức của tình yêu thương nồng đậm cho dòng chảy 9+!' }
+      { name: 'Nguyễn Kim Ngọc', text: 'Thầy ơi! Con Ngọc đâyyy. Cái đứa hay đến muộn ngồi cạnh Khánh Chi ạ. Nhờ những buổi học, những lời dạy của thầy mà con quyết định theo con đường nghề giáo để dạy cho các em tiểu học. Các em đáng yêu lắm ạ! Mới ngày nào xa thầy con là svien năm nhất giờ đã là năm hai nhưng con vẫn không thể nào quên những buổi học, buổi tổng ôn, luyện đề hay cả những lời dặn dò ân cần của thầy trước khi thi. Con cảm ơn thầy nhiều ạ! Cảm ơn thầy đã gieo những mầm xanh của tri thức của tình yêu thương nồng đậm cho dòng chảy 9+!' },
+      { name: 'Vũ Phạm Thanh Vân', text: 'Con muốn gửi lời cảm ơn sâu sắc đến thầy Nguyễn Huy Hoàng- người thuyền trưởng đã chèo lái con thuyền đưa hàng bao thế hệ học sinh vượt thác ghềnh để đi đến dòng chảy 9+ thành công. Dòng chảy 9+ không chỉ là nơi thầy gieo những lời văn hay mà còn gieo những bài học cuộc sống ý nghĩa vào tâm trí học trò như câu nói muôn thuở” học văn là học tập sự tử tế”. Nhân ngày 20/11 con muốn chúc thầy tủi 18 luôn mạnh khỏe, rạng ngời, trẻ mãi, vui tươi để tiếp tục với sự nghiệp nghề giáo, hành trình thuyền trưởng để đưa các lứa học trò ,thuyền viên gặt hái được nhiều và nhiều hơn nữa những điểm 9+ ạ.' },
+      { name: 'Thầy ới ời ơi', text: 'Chúc thầy 20/11 vui vẻ, hạnh phúc và càng thành công trong công việc và cuộc sống' }
     ];
     const anims = ['pop', 'drop', 'fromR', 'pop'];
     const letters = raw.map((l, i) => ({ ...l, anim: anims[i % 4], d: (0.2 + i * 0.09).toFixed(2), open: () => this.setState({ open: i }) }));
@@ -1107,7 +1109,7 @@ ${(s17) ? html`<div class="spread ${k17}">
 <div class="pg pgL tex" style="background-color: #F1DFB6">
 <p class="kicker a up" style="color: #7A5214">những phong thư</p>
 <div class="persp"><h2 class="h2 a stand" style="--d: .1s; color: #3B2A12">Thư gửi thầy</h2></div>
-<p class="txt a up" style="--d: .2s">Có những điều nói trực tiếp thì ngại, nên chúng con viết. Hai lá thư dưới đây là của Mỹ Dung và Kim Ngọc, nhưng cũng là lời của cả lớp gửi thầy. Chế Lan Viên bảo thơ cần có hình, có ý và có tình. Thư của chúng con có thể vụng về hình và ý, nhưng tình thì đầy.</p>
+<p class="txt a up" style="--d: .2s">Có những điều nói trực tiếp thì ngại, nên chúng con viết. Bốn lá thư dưới đây là của Mỹ Dung, Kim Ngọc, Thanh Vân và một bạn xin giấu tên, nhưng cũng là lời của cả lớp gửi thầy. Chế Lan Viên bảo thơ cần có hình, có ý và có tình. Thư của chúng con có thể vụng về hình và ý, nhưng tình thì đầy.</p>
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.4cqw; margin-top: 3cqw; padding: 0 1cqw">
 <div class="a fromL" style="--d: .3s"><figure class="pol" style="--t: -3deg"><img src="assets/img/kep-do.png" alt="" style="position: absolute; top: -2.4cqw; left: 1.6cqw; width: 2.6cqw; z-index: 4; object-fit: contain" /><img src="assets/img/anh-531107985.jpg" alt="Lá thư viết tay gửi thầy" style="aspect-ratio: 3 / 4; object-position: 50% 70%" /><figcaption>“Hãy nói lời yêu thật nhiều…”</figcaption></figure></div>
 <div class="a fromL" style="--d: .5s; margin-top: 3cqw"><figure class="pol" style="--t: 3deg"><img src="assets/img/kep-go.png" alt="" style="position: absolute; top: -2.8cqw; left: 50%; width: 2.8cqw; translate: -50% 0; z-index: 4; object-fit: contain" /><img src="assets/img/anh-486700578.jpg" alt="Tin nhắn báo thầy đã thi xong" style="aspect-ratio: 3 / 4; object-position: 50% 0" /><figcaption>“Trò của thầy thi xong rùi ạ”</figcaption></figure></div>
@@ -1117,13 +1119,13 @@ ${(s17) ? html`<div class="spread ${k17}">
 </div>
 <div class="pg pgR tex" style="background-color: #F1DFB6; display: flex; flex-direction: column">
 <p class="hand a up" style="margin: 0; font-size: var(--k); color: #6B5229">Rê chuột để hé thư, bấm để đọc trọn.</p>
-<div class="one-letter" style="flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: center; align-items: center; gap: 3cqw 2cqw; margin-top: 1.2cqw; padding: 0 1cqw 1.4cqw">
+<div class="one-letter" style="flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: center; align-items: center; gap: 2.4cqw 2cqw; margin-top: 1.2cqw; padding: 0 1cqw 1.4cqw">
 ${(letters || []).map((lt, $index) => html`<div class="a ${lt.anim}" style="--d: ${lt.d}s; width: 100%">
 <button type="button" class="env" onClick=${lt.open} aria-label="Mở thư: ${lt.name}">
 <span class="body"></span><span class="letter">Kính gửi thầy…</span><span class="pocket"></span><span class="flap"></span><span class="seal">9+</span><span class="who">${lt.name}</span>
 </button>
 </div>`)}
-<div class="a pop" style="--d: 1.2s; width: 22%; grid-column: 1 / -1; justify-self: end"><img class="stk wig" src="assets/img/hd-am-tra.png" alt="Sticker ấm trà" /></div>
+<div class="a pop" style="--d: 1.2s; width: 12%; grid-column: 1 / -1; justify-self: end; margin-top: -3cqw"><img class="stk wig" src="assets/img/hd-am-tra.png" alt="Sticker ấm trà" /></div>
 </div>
 <span class="pgno">34</span>
 </div>
